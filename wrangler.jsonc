@@ -1,0 +1,42 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "yorishiru",
+  "main": "src/worker.tsx",
+  "compatibility_date": "2026-07-26",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [
+    {
+      "pattern": "yorishiru.yhay81.com",
+      "custom_domain": true,
+    },
+  ],
+  "observability": {
+    "enabled": true,
+  },
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "yorishiru",
+      "database_id": "a569f404-51c9-4a6d-8235-828e3d19c9fe",
+      "migrations_dir": "migrations",
+    },
+  ],
+  "ratelimits": [
+    {
+      "name": "WRITE_LIMITER",
+      "namespace_id": "29072902",
+      "simple": {
+        "limit": 20,
+        "period": 60,
+      },
+    },
+  ],
+  "triggers": {
+    "crons": ["30 3 * * *"],
+  },
+}
